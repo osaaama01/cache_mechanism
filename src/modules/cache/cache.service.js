@@ -1,4 +1,4 @@
-import constants from '../../common/constants.js';
+import constants from '../../common/constants/constants.js';
 import Cache from '../../database/mongo-db/schema/cache/cache.js';
 
 class CacheService {
