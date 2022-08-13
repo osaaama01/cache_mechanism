@@ -26,6 +26,11 @@ class CacheController {
         return res.send(await CacheService.removeKey(res, params));
     }
 
+    async removeAllKeys(req, res) {
+
+        return res.send(await CacheService.removeAllKeys(res));
+    }
+
 }
 
 export default new CacheController();

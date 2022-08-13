@@ -11,10 +11,10 @@ class CacheService {
             if (data) {
                 isExpire = await this.calculateTtl(data);
             }
-            if (data || !isExpire) {
+            if (!data || !isExpire) {
                 console.log('Cache miss');
                 this.checkMaxEntries(key);
-                const value = getDummyData;
+                const value = this.getDummyData();
                 await Cache.create({ key, value });
                 res.status(200);
                 return { value };
@@ -76,6 +76,19 @@ class CacheService {
             }
             res.status(400);
             return { message: 'no result with given key exists' };
+        }
+        catch (exception) {
+            console.log(exception);
+            res.status(502);
+            return { message: exception.toString() };
+        }
+    }
+
+    async removeAllKeys(res) {
+        try {
+            await Cache.deleteMany({});
+            res.status(200);
+            return { success: 'true' };
         }
         catch (exception) {
             console.log(exception);
