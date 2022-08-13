@@ -2,7 +2,9 @@
 
 Implements a cache mechanism using mongodb, nodejs and express
 
-First Install all the Node modules using - npm i
+First Install all the Node modules using
+
+    - npm i
 
 Make sure to ask for .env file from the maintainer/collaborator of the repository. You can use the env.template as well.
 
