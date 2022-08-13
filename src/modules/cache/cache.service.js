@@ -109,7 +109,7 @@ class CacheService {
             return;
 
         const count = await Cache.count();
-        if (count === constants.CACHE_MAX_RECORDS) {
+        if (count === Number(constants.CACHE_MAX_RECORDS)) {
             const record = await Cache.find({}).sort({ ttl: 1 }).limit(1).exec();
             await Cache.deleteOne({ key: record[0].key });
         }
