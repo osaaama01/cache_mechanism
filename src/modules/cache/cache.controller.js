@@ -3,8 +3,8 @@ import CacheService from "./cache.service.js";
 class CacheController {
 
     async readData(req, res) {
-
-        return res.send(await CacheService.getDataByKey(res));
+        const params = req.params;
+        return res.send(await CacheService.getDataByKey(res, params));
 
     }
 
@@ -22,8 +22,8 @@ class CacheController {
 
     async removeKey(req, res) {
 
-        const body = req.params;
-        return res.send(await CacheService.removeKey(res, body));
+        const params = req.params;
+        return res.send(await CacheService.removeKey(res, params));
     }
 
 }

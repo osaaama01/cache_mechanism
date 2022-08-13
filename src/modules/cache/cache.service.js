@@ -3,20 +3,21 @@ import Cache from '../../database/mongo-db/schema/cache/cache.js';
 
 class CacheService {
 
-    async getDataByKey(res, key) {
+    async getDataByKey(res, param) {
         try {
-            const data = await Cache.find({ key });
+            const key = String(param.key);
+            const data = await Cache.findOne({ key });
             let isExpire;
-            if (data.length !== 0) {
-                isExpire = await calculateTtl(data.key);
+            if (data) {
+                isExpire = await this.calculateTtl(data);
             }
-            if (data.length !== 0 || !isExpire) {
+            if (data || !isExpire) {
                 console.log('Cache miss');
-                checkMaxEntries(key);
+                this.checkMaxEntries(key);
                 const value = getDummyData;
                 await Cache.create({ key, value });
                 res.status(200);
-                return { value }
+                return { value };
 
             }
             console.log('Cache hit');
