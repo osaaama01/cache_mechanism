@@ -1,11 +1,12 @@
 import Server from "./server.js";
+import connect from './database/mongo-db/index.js'
+import envConfigs from "./configs/index.js";
 
 let server;
 
 async function run() {
-  // const s = await db.connect();
-  // console.log('connected to ' + s);
-  console.log("Running...");
+  envConfigs();
+  const dbConnection = await connect();
   server = new Server().listen(process.env.PORT);
 }
 
